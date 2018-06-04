@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { parsed: localEnv } = require('dotenv').config()
 
 module.exports = {
@@ -10,27 +10,28 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,
         use: ['css-loader'],
-      }
+      },
     ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
+      template: './src/index.html',
+      filename: './index.html',
     }),
     new webpack.EnvironmentPlugin(localEnv),
   ],
   devServer: {
-    contentBase: path.join(__dirname, "static"),
+    contentBase: path.join(__dirname, 'static'),
     historyApiFallback: true,
   },
   output: {
+    path: path.join(__dirname, 'static'),
     publicPath: '/',
   },
 }
