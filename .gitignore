@@ -1,0 +1,8 @@
+/node_modules
+flow-typed
+.vscode
+.next
+/build
+.DS_Store
+.env
+npm-debug.log*
