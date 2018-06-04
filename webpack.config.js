@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const { parsed: localEnv } = require('dotenv').config()
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   module: {
@@ -24,7 +24,14 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new webpack.EnvironmentPlugin(localEnv),
+    new webpack.DefinePlugin({
+      'process.env': {
+        FACEBOOK_CLIENT_ID: JSON.stringify(process.env.FACEBOOK_CLIENT_ID),
+        GOOGLE_CLIENT_ID: JSON.stringify(process.env.GOOGLE_CLIENT_ID),
+        API_URL: JSON.stringify(process.env.API_URL),
+      },
+    }),
+    new Dotenv(),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'static'),

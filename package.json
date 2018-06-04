@@ -24,6 +24,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.6",
     "eslint": "^4.19.1",
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-import": "^2.12.0",
