@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Container, Body } from './styled'
 import { Column } from 'components/Generic'

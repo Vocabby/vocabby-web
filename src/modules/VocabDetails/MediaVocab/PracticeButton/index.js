@@ -5,13 +5,13 @@ import type { IProps } from './types'
 import { Button } from 'components/Generic'
 
 const PracticeButton = ({
-  isSignedIn,
+  isAuthenticated,
   vocabId,
   hasStudyItems,
 }: IProps) => (
-  <Link to={isSignedIn ? `/practice/${vocabId}` : '/signin'}>
-    <Button primary disabled={isSignedIn && !hasStudyItems}>
-      {isSignedIn ? 'Practice' : 'Sign in to practice'}
+  <Link to={isAuthenticated ? `/practice/${vocabId}` : '/signin'}>
+    <Button primary disabled={isAuthenticated && !hasStudyItems}>
+      {isAuthenticated ? 'Practice' : 'Sign in to practice'}
     </Button>
   </Link>
 )

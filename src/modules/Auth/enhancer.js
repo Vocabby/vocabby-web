@@ -4,12 +4,12 @@ import { compose, withHandlers, branch, renderComponent } from 'recompose'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 import { withFormik } from 'formik'
-import type { IState } from 'common/types'
+import type { IStore } from 'store/types'
 import { ROUTE } from 'common/constants'
 
 const buildEnhancer = (formConfig: any) => compose(
   connect(
-    (state: IState) => state.auth,
+    (store: IStore) => store.auth,
     ({
       auth: {
         facebookSignInAsync,
@@ -17,7 +17,7 @@ const buildEnhancer = (formConfig: any) => compose(
         signInAsync,
         signUpAsync,
       },
-    }: IState) => ({
+    }: IStore) => ({
       facebookSignInAsync,
       googleSignInAsync,
       signInAsync,

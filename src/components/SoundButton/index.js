@@ -1,8 +1,7 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Sound from 'react-sound'
 import { withState, withHandlers, defaultProps, compose } from 'recompose'
-
 import { ButtonContainer } from './styled'
 import type { IProps } from './types'
 
@@ -39,7 +38,7 @@ export default compose(
   }),
   withState(
     'playStatus', 'setPlayStatus',
-    (props: IProps) => props.doesAutoplay ? Sound.status.PLAYING : Sound.status.STOPPED
+    (props: IProps) => props.doesAutoplay ? Sound.status.PLAYING : Sound.status.STOPPED,
   ),
   withHandlers({
     handleStop({ setPlayStatus }: IProps) {

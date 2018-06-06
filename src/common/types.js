@@ -10,8 +10,12 @@ export type ICredentials = {|
   password: string,
 |}
 
-// TODO: define
-export type IWord = any
+export type IWord = {|
+  +id: string,
+  +title: string,
+  +definition: string,
+  +audioUrl: string,
+|}
 
 export type IStudyItem = {|
   +wordId: string,
@@ -21,8 +25,10 @@ export type IVocab = {|
   +id: string,
   +group: string,
   +mediaUrl: string,
+  +previewUrl: string,
   +wordCount: number,
   +title: string,
-  +words: $ReadonlyArray<IWord>,
-  +studyItems: $ReadonlyArray<IStudyItem>,
+  +slug: string,
+  +words: IWord[],
+  +studyItems: IStudyItem[],
 |}

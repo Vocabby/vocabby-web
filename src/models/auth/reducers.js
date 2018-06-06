@@ -1,8 +1,7 @@
 // @flow
-import type { ISignInFailedPayload, IAuthReducer, IAuthState } from './types'
-import initialState from './state'
+import type { ISignInFailedPayload, IAuthReducers, IAuthState } from './types'
 
-const reducers: IAuthReducer = {
+const reducers: IAuthReducers = {
   signingIn(state: IAuthState): IAuthState {
     return {
       ...state,

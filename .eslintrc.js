@@ -24,9 +24,6 @@ module.exports = {
       'babel-module': {},
     },
   },
-  globals: {
-    '$ReadonlyArray': true,
-  },
   rules: {
     'react/no-array-index-key': 0,
     'no-undefined': 0,

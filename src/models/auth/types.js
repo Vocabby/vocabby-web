@@ -10,18 +10,19 @@ export type IAuthEffects = {|
   googleSignInAsync: Function,
   signInAsync: Function,
   signUpAsync: Function,
-|}
-
-export type IAuthReducer = {|
-  signingIn: Function,
-  signInFailed: Function,
-  signedIn: Function,
   signOut: Function,
 |}
 
-export type IAuthDispatcher = IAuthReducer & IAuthEffects
+export type IAuthReducers = {|
+  signingIn: Function,
+  signInFailed: Function,
+  signedIn: Function,
+  signedOut: Function,
+|}
 
-export type IAuthModel = IAuthState & IAuthEffects & IAuthReducer
+export type IAuthDispatcher = IAuthReducers & IAuthEffects
+
+export type IAuthModel = IAuthState & IAuthEffects & IAuthReducers
 
 export type ISignInFailedPayload = {|
   errorMessage: string,

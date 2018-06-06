@@ -1,5 +1,5 @@
+// @flow
 import styled from 'styled-components'
-
 
 export const ContentHeader = styled.div`
   display: flex;

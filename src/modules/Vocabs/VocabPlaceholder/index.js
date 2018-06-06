@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { VocabContainer } from './styled'
 import { Column } from 'components/Generic'

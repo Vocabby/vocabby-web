@@ -1,6 +1,6 @@
 // @flow
 export type IProps = {|
-  +isSignedIn: boolean,
+  +isAuthenticated: boolean,
   +hasStudyItems: boolean,
   +vocabId: string,
 |}

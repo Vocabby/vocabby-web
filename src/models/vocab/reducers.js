@@ -1,11 +1,14 @@
-const reducers = {
-  loading(state) {
+// @flow
+import type { IVocabReducers, IVocabState } from './types'
+
+const reducers: IVocabReducers = {
+  loading(state: IVocabState) {
     return {
       ...state,
       isLoading: true,
     }
   },
-  loaded(state, { vocab }) {
+  loaded(state: IVocabState, { vocab }) {
     return {
       ...state,
       isLoading: false,

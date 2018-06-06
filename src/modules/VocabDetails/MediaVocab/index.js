@@ -10,7 +10,7 @@ import Lyrics from './Lyrics'
 import FavoriteButton from './FavoriteButton'
 import { Container, Column, Panel, PanelBody, PanelHeading } from 'components/Generic'
 
-const MediaVocab = ({ vocab, isSignedIn, removeStudyItem }: IProps) => (
+const MediaVocab = ({ vocab, isAuthenticated, removeStudyItem }: IProps) => (
   <Container>
     <Column width={30}>
       <StickyBox>
@@ -54,7 +54,7 @@ const MediaVocab = ({ vocab, isSignedIn, removeStudyItem }: IProps) => (
             <PracticeButton
               hasStudyItems={Object.keys(vocab.studyItems).length > 0}
               vocabId={vocab.id}
-              isSignedIn={isSignedIn} />
+              isAuthenticated={isAuthenticated} />
           </div>
         </Panel>
       </StickyBox>
