@@ -24,14 +24,15 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
+    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env': {
         FACEBOOK_CLIENT_ID: JSON.stringify(process.env.FACEBOOK_CLIENT_ID),
         GOOGLE_CLIENT_ID: JSON.stringify(process.env.GOOGLE_CLIENT_ID),
         API_URL: JSON.stringify(process.env.API_URL),
+        LOGROCKET_TOKEN: JSON.stringify(process.env.LOGROCKET_TOKEN),
       },
     }),
-    new Dotenv(),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'static'),
