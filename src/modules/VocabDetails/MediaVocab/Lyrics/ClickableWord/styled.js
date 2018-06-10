@@ -1,4 +1,6 @@
+// @flow
 import styled from 'styled-components'
+import theme from 'styles/theme'
 
 export const Word = styled.span`
   background-color: ${props => props.added ? '#fff89c' : 'transparent'};
@@ -13,5 +15,5 @@ export const Word = styled.span`
 `
 
 export const Highlighted = styled.b`
-  color: ${props => props.theme.accentBlueColor};
+  color: ${theme.color.accentBlue};
 `

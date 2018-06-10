@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Row = styled.tr`
   td:first-child {
-    padding-left: 8px !important;
+    padding-left: 8px;
   }
 
   i {
@@ -21,6 +21,7 @@ export const Row = styled.tr`
   }
 `
 
-export const HighlightedText = styled.b`
-  color: ${props => props.theme.accentBlueColor};
+export const HighlightedText = styled.span`
+  color: ${props => props.theme.color.accentBlue};
+  font-weight: bold;
 `

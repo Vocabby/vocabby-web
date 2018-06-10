@@ -209,8 +209,16 @@ export const ErrorLabel = styled.div`
   color: ${props => props.theme.color.red};
 `
 
-export const HighlightedText = styled.span`
-  color: ${props => props.theme.color.accentBlue};
+export const Table = styled.table`
+  width: 100%;
+  max-width: 100%;
+
+  td {
+    border-top: 1px solid #e4eaec;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+  }
 `
 
 export const H1 = styled.h1`
@@ -218,4 +226,35 @@ export const H1 = styled.h1`
   margin: 25px 0;
   margin-top: 15px;
   color: #37474f;
+`
+
+export const Widget = styled.div`
+  background: white;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+  margin-bottom: 50px;
+  outline: none;
+`
+
+export const WidgetBody = styled.div`
+  padding: 0 25px 25px 25px;
+  text-align: center;
+`
+
+export const WidgetHeader = styled.div`
+  padding: 25px 25px 0 25px;
+`
+
+export type WidgetFooter = styled.div`
+  position: relative;
+  padding: 25px;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  color: #666;
+  min-height: 60px;
+  background-color: #f6f6f6;
+  border-radius: 0 0 6px 6px;
+  border-top: 1px solid #e5edf5;
+  text-align: center;
 `

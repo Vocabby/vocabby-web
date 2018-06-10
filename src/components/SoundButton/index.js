@@ -2,8 +2,19 @@
 import React from 'react'
 import Sound from 'react-sound'
 import { withState, withHandlers, defaultProps, compose } from 'recompose'
+import Icon from 'components/Icon'
 import { ButtonContainer } from './styled'
-import type { IProps } from './types'
+
+type IProps = {|
+  doesAutoplay?: boolean,
+  audioUrl?: string,
+  size: string,
+  isVisible: boolean,
+  handleStop: Function,
+  handlePlay: Function,
+  playStatus: string,
+  setPlayStatus: Function,
+|}
 
 const SoundButton = ({
   audioUrl,
@@ -21,11 +32,7 @@ const SoundButton = ({
         onFinishedPlaying={handleStop}
       />
       <div onClick={handlePlay}>
-        <i className={`fa ${
-          playStatus === Sound.status.PLAYING
-            ? 'fa-pause-circle-o'
-            : 'fa-play-circle-o'
-        }`} />
+        <Icon icon={playStatus === Sound.status.PLAYING ? 'pause-circle-o' : 'play-circle-o'} />
       </div>
     </ButtonContainer>
   )

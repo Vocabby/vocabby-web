@@ -18,3 +18,8 @@ export const Lead = styled.p`
   font-weight: 300;
   line-height: 1.4;
 `
+
+export const HighlightedText = styled.span`
+  color: ${props => props.theme.color.accentBlue};
+  font-weight: bold;
+`

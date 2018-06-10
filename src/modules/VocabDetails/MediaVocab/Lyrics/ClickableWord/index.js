@@ -2,7 +2,14 @@
 import React from 'react'
 import { Tooltip } from 'react-tippy'
 import { Word, Highlighted } from './styled'
-import type { IProps } from './types'
+
+type IProps = {
+  onClick: Function,
+  isAdded: boolean,
+  title: string,
+  definition: string,
+  value: string,
+}
 
 const ClickableWord = ({ onClick, isAdded, title, definition, value }: IProps) => (
   <Tooltip

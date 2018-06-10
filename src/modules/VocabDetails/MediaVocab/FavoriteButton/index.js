@@ -1,14 +1,19 @@
 // @flow
 import React from 'react'
 import { FavButton } from './styled'
-import type { IProps } from './types'
+import Icon from 'components/Icon'
+
+type IProps = {
+  isFavorite: boolean,
+  onFavorite: boolean => void,
+}
 
 const FavoriteButton = ({ isFavorite, onFavorite }: IProps) => (
   <FavButton
     success={isFavorite}
     title="Bookmark it"
     onClick={() => onFavorite(!isFavorite)}>
-    <i className={`fa fa-${isFavorite ? 'check' : 'bookmark-o'}`}/>
+    <Icon icon={isFavorite ? 'check' : 'bookmark-o'} />
   </FavButton>
 )
 

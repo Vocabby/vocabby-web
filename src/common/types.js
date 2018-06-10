@@ -29,6 +29,12 @@ export type IVocab = {|
   +wordCount: number,
   +title: string,
   +slug: string,
+  +isFavorite: boolean,
+  +words: IWord[],
+  +studyItems: IStudyItem[],
+|}
+
+export type IPracticeSet = {|
   +words: IWord[],
   +studyItems: IStudyItem[],
 |}

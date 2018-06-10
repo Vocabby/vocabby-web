@@ -24,11 +24,20 @@ module.exports = {
       'babel-module': {},
     },
   },
+  globals: {
+    SyntheticKeyboardEvent: true,
+    SyntheticMouseEvent: true,
+    SyntheticInputEvent: true,
+  },
   rules: {
     'react/no-array-index-key': 0,
+    'react/require-default-props': 0,
     'no-undefined': 0,
     'react/prop-types': 0,
     'function-paren-newline': 0,
     'import/group-exports': 0,
+    'no-extra-parens': 0,
+    'jsx-a11y/no-autofocus': 0,
+    'no-duplicate-imports': 0,
   },
 }

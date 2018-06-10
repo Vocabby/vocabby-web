@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
-import { Wrapper, Lead } from './styled'
-import { HighlightedText, Container, Column, H1 } from 'components/Generic'
+import { Wrapper, Lead, HighlightedText } from './styled'
+import { Container, Column, H1 } from 'components/Generic'
 
 const Hero = () => (
   <Wrapper>

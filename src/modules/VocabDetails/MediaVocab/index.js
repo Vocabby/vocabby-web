@@ -1,14 +1,20 @@
 // @flow
 import React from 'react'
 import StickyBox from 'react-sticky-box'
-import type { IProps } from '../types'
 import MyWords from './MyWords'
 import Preview from './Preview'
 import PracticeButton from './PracticeButton'
 import { ContentHeader, DoorStop, MutedText } from './styled'
 import Lyrics from './Lyrics'
 import FavoriteButton from './FavoriteButton'
+import type { IVocab } from 'common/types'
 import { Container, Column, Panel, PanelBody, PanelHeading } from 'components/Generic'
+
+type IProps = {|
+  +vocab: IVocab,
+  +isAuthenticated: boolean,
+  +removeStudyItem: Function,
+|}
 
 const MediaVocab = ({ vocab, isAuthenticated, removeStudyItem }: IProps) => (
   <Container>
@@ -23,7 +29,7 @@ const MediaVocab = ({ vocab, isAuthenticated, removeStudyItem }: IProps) => (
       <Panel>
         <ContentHeader>
           <FavoriteButton
-            isFavorite
+            isFavorite={vocab.isFavorite}
             onFavorite={() => ({})}
           />
           <h2>
@@ -52,7 +58,7 @@ const MediaVocab = ({ vocab, isAuthenticated, removeStudyItem }: IProps) => (
           />
           <div className="panel-footer text-center">
             <PracticeButton
-              hasStudyItems={Object.keys(vocab.studyItems).length > 0}
+              hasStudyItems={vocab.studyItems.length > 0}
               vocabId={vocab.id}
               isAuthenticated={isAuthenticated} />
           </div>

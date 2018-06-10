@@ -3,7 +3,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost'
 import gql from 'graphql-tag'
 import clientStorage from './clientStorage'
 import env from 'common/env'
-import type { IUserToken, IVocab } from 'common/types'
+import type { IUserToken, IVocab, IPracticeSet } from 'common/types'
 
 const getClient = () => {
   const token = clientStorage.getToken()
@@ -42,7 +42,7 @@ export const getVocab = async (slug: string): Promise<IVocab> => {
           title
           mediaUrl
           words {
-            id
+            id: _id
             title
             definition
             audioUrl
@@ -50,6 +50,30 @@ export const getVocab = async (slug: string): Promise<IVocab> => {
           wordCount
           content
           contentTranslated
+          studyItems {
+            wordId
+          }
+        }
+      }
+    `,
+    variables: {
+      slug,
+    },
+  })
+  return result.data.vocab
+}
+
+export const initPractice = async (slug: string): Promise<IPracticeSet> => {
+  const result = await getClient().query({
+    query: gql`
+      query GetVocab($slug: String!) {
+        vocab: vocabBySlug(slug: $slug) {
+          words {
+            id: _id
+            title
+            definition
+            audioUrl
+          }
           studyItems {
             wordId
           }

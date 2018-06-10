@@ -1,9 +1,14 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Row, HighlightedText } from './styled'
-import type { IProps } from './types'
+import type { IWord } from 'common/types'
 import SoundButton from 'components/SoundButton'
+import Icon from 'components/Icon'
+
+type IProps = {
+  word: IWord,
+  onRemove: Function,
+}
 
 const WordRow = ({ word, onRemove }: IProps) => (
   <Row>
@@ -15,7 +20,7 @@ const WordRow = ({ word, onRemove }: IProps) => (
     </td>
     <td>{word.definition}</td>
     <td>
-      <i className="fa fa-remove" onClick={() => onRemove(word.id)} />
+      <Icon icon="remove" onClick={() => onRemove(word.id)} />
     </td>
   </Row>
 )

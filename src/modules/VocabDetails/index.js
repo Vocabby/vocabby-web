@@ -5,8 +5,13 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MediaVocab from './MediaVocab'
 import ListVocab from './ListVocab'
-import type { IProps } from './types'
 import withLayout from 'hocs/withLayout'
+import type { IVocab } from 'common/types'
+
+type IProps = {
+  +isLoading: boolean,
+  +vocab: IVocab,
+}
 
 const VocabDetails = ({ isLoading, ...rest }: IProps) => (
   <Fragment>
