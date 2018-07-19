@@ -4,7 +4,7 @@ import MouseTrap from 'mousetrap'
 import { LetterContainer, Letter, OptionLetter, CurrentLetter, CorrectLetter } from './styled'
 import { generateWordBuilderGame } from './helpers'
 import Answer from 'components/Answer'
-import { WidgetBody, WidgetFooter } from 'components/Generic'
+import { WidgetBody, WidgetFooter, Button } from 'components/Generic'
 import { charKeys, equalWithoutAccents } from 'common/utils'
 import type { IWord } from 'common/types'
 import SoundButton from 'components/SoundButton'
@@ -159,9 +159,9 @@ export default class WordBuilderGame extends Component<IProps, IState> {
           }
         </WidgetBody>
         <WidgetFooter>
-          <button className="btn btn-primary" onClick={() => this.checkResult(true)}>
+          <Button primary onClick={() => this.checkResult(true)}>
             {this.state.done ? 'Continue' : 'Check answer'}
-          </button>
+          </Button>
         </WidgetFooter>
       </Fragment>
     )

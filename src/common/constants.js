@@ -5,5 +5,5 @@ export const ROUTE = Object.freeze({
   SIGN_IN: '/signin',
   SIGN_UP: '/signup',
   SIGN_OUT: '/signout',
-  PRACTICE: '/practice/:slug',
+  PRACTICE: '/practice',
 })

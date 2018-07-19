@@ -1,17 +1,18 @@
 // @flow
 import styled from 'styled-components'
+import Icon from 'components/Icon'
 
 export const Row = styled.div`
   line-height: 1.7;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.color.text};
 
   i {
     visibility: hidden;
     cursor: pointer;
-    color: ${props => props.theme.lightGrayColor};
+    color: ${props => props.theme.color.lightGray};
 
     &:hover {
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.color.text};
     }
   }
 
@@ -20,4 +21,8 @@ export const Row = styled.div`
       visibility: visible;
     }
   }
+`
+
+export const StyledIcon = styled(Icon)`
+  margin-right: 5px;
 `

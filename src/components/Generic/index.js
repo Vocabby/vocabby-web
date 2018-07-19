@@ -245,9 +245,10 @@ export const WidgetBody = styled.div`
 
 export const WidgetHeader = styled.div`
   padding: 25px 25px 0 25px;
+  position: relative;
 `
 
-export type WidgetFooter = styled.div`
+export const WidgetFooter = styled.div`
   position: relative;
   padding: 25px;
   text-shadow: 0 1px rgba(255, 255, 255, 0.5);

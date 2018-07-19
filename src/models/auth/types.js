@@ -1,11 +1,13 @@
 // @flow
+import type { RematchDispatch } from '@rematch/core'
+
 export type IAuthState = {|
   isAuthenticated: boolean,
   errorMessage?: string,
   isAuthenticating: boolean,
 |}
 
-export type IAuthEffects = {|
+export type IAuthEffects = RematchDispatch => {|
   facebookSignInAsync: Function,
   googleSignInAsync: Function,
   signInAsync: Function,

@@ -1,30 +1,40 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import { compose } from 'recompose'
 import { withRouter, Redirect } from 'react-router-dom'
 import type { ContextRouter } from 'react-router-dom'
 import LearnResult from './LearnResult'
 import WordBuilderGame from './WordBuilderGame'
 import TypeInGame from './TypeInGame'
+import { Widget } from './styled'
+import { ROUTE } from 'common/constants'
 import GameLoading from 'components/GameLoading'
 import ProgressBar from 'components/ProgressBar'
 import CloseButton from 'components/CloseButton'
-import { Widget, WidgetHeader, Column, Container } from 'components/Generic'
+import { WidgetHeader, Column, Container } from 'components/Generic'
 import { shuffleArray, divideInt, randomInt } from 'common/utils'
 import { initPractice } from 'common/api'
 import type { IWord } from 'common/types'
+import withTokenValidation from 'hocs/withTokenValidation'
 
 const GAME = Object.freeze({
   BUILDER: 'builder-game',
   TYPE_IN: 'type-in-game',
 })
 
+type IGame = $Values<typeof GAME>
+
 type IProps = ContextRouter & {
 
 }
 
+type IPracticeItem = IWord & {
+  game: IGame,
+}
+
 type IState = {|
-  items: IWord[],
-  current: IWord,
+  items: IPracticeItem[],
+  current: IPracticeItem,
   correct: number,
   incorrect: number,
   isLoading: boolean,
@@ -39,54 +49,37 @@ class Practice extends Component<IProps, IState> {
       current: {},
       gameEnded: false,
       correct: 0,
-      feedback: [],
       incorrect: 0,
-      results: {},
       isLoading: true,
     }
   }
 
   async componentDidMount() {
     const result = await initPractice(this.props.match.params.slug)
-    console.log(result)
 
-    const items = result.data.values.map(item => {
-      item.game = BUILDER_GAME
-      return item
-    })
+    const items = result.studyItems.map(item => ({
+      ...item.word,
+      game: GAME.BUILDER,
+    }))
+
     shuffleArray(items)
-    const results = items.reduce((acc, val) => {
-      acc[val.id] = 0
-      return acc
-    }, {})
-    this.updateItems(items, 0, 0, results, [])
+    this.updateItems(items, 0, 0)
   }
 
-  endPractice = () => {
-    if (
-      this.state.gameEnded ||
-      confirm(
-        'Are you sure you want to end practice? Your progress will be lost'
-      )
-    ) {
-      this.props.history.push('/home')
-    }
-  }
+  interruptPractice = () =>
+    confirm('Are you sure you want to end practice? Your progress will be lost')
+      && this.props.history.push(ROUTE.HOME)
+
+  endPractice = () => this.props.history.push(ROUTE.HOME)
 
   getNext = guessed => {
-    let {
-      guessedCorrectly,
-      guessedIncorrectly,
-      results,
-      current,
-      feedback,
-    } = this.state
+    let { correct, incorrect } = this.state
+    const { current } = this.state
     const items = this.state.items.slice(1)
     if (guessed) {
-      guessedCorrectly++
-      results[current.id] += current.game === BUILDER_GAME ? 3 : 1
-      if (current.game === BUILDER_GAME) {
-        current.game = TYPEIN_GAME
+      correct++
+      if (current.game === GAME.BUILDER) {
+        current.game = GAME.TYPE_IN
         if (items.length < 5) {
           items.push(current)
         } else {
@@ -95,25 +88,20 @@ class Practice extends Component<IProps, IState> {
         }
       }
     } else {
-      guessedIncorrectly++
-      feedback.push(current)
+      incorrect++
     }
     this.updateItems(
       items,
-      guessedCorrectly,
-      guessedIncorrectly,
-      results,
-      feedback
+      correct,
+      incorrect,
     )
   }
 
-  updateItems({ items, correct, incorrect, results, feedback }) {
+  updateItems(items, correct, incorrect) {
     this.setState({
       items,
       correct,
       incorrect,
-      results,
-      feedback,
       current: items[0],
       gameEnded: items.length === 0,
       isLoading: false,
@@ -121,46 +109,17 @@ class Practice extends Component<IProps, IState> {
   }
 
   getProgress() {
-    const done = this.state.guessedCorrectly + this.state.guessedIncorrectly
+    const done = this.state.correct + this.state.incorrect
     const total = done + this.state.items.length
 
     return done / total * 100
   }
 
-  renderContent() {
-    if (this.state.gameEnded) {
-      if (this.state.guessedCorrectly + this.state.guessedIncorrectly === 0) {
-        return <Redirect to="/home" push />
-      }
-      return <LearnResult result={this.state} onComplete={this.endPractice} />
-    } else if (this.state.isLoading) {
-      return <GameLoading />
-    } else {
-      if (this.state.current.game === BUILDER_GAME) {
-        return (
-          <WordBuilderGame
-            key={this.state.current.id}
-            word={this.state.current.word}
-            getNextWord={this.getNext}
-          />
-        )
-      } else if (this.state.current.game === TYPEIN_GAME) {
-        return (
-          <TypeInGame
-            key={this.state.current.id}
-            word={this.state.current.word}
-            getNextWord={this.getNext}
-          />
-        )
-      } else {
-        throw Error('Unknown game type')
-      }
-    }
-  }
-
   render() {
+    const { gameEnded, correct, incorrect, isLoading, current } = this.state
     return (
       <Container>
+        <Column width={20} />
         <Column width={60}>
           <Widget>
             <WidgetHeader>
@@ -175,7 +134,28 @@ class Practice extends Component<IProps, IState> {
                   )
               }
             </WidgetHeader>
-            {this.renderContent()}
+            {
+              gameEnded ? (
+                (correct + incorrect === 0)
+                  ? <Redirect to={ROUTE.HOME} push />
+                  : <LearnResult result={this.state} onComplete={this.endPractice} />
+              ) : (
+                isLoading
+                  ? <GameLoading />
+                  : (
+                    (current.game === GAME.BUILDER)
+                      ? <WordBuilderGame key={current.id}
+                          word={current}
+                          getNextWord={this.getNext}
+                        />
+                      : <TypeInGame
+                          key={current.id}
+                          word={current}
+                          getNextWord={this.getNext}
+                        />
+                  )
+              )
+            }
           </Widget>
         </Column>
       </Container>
@@ -183,4 +163,7 @@ class Practice extends Component<IProps, IState> {
   }
 }
 
-export default withRouter(Practice)
+export default compose(
+  withRouter,
+  withTokenValidation,
+)(Practice)

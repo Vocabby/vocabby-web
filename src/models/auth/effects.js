@@ -1,12 +1,11 @@
 // @flow
-import { dispatch } from '@rematch/core'
 import type { IAuthEffects } from './types'
 import clientStorage from 'common/clientStorage'
 import { errorToString } from 'common/utils'
 import { signIn, signInFacebook, signInGoogle, signUp } from 'common/api'
 import type { ICredentials } from 'common/types'
 
-const effects: IAuthEffects = {
+const effects: IAuthEffects = dispatch => ({
   async signInAsync({ email, password }: ICredentials) {
     try {
       dispatch.auth.signingIn()
@@ -14,7 +13,6 @@ const effects: IAuthEffects = {
       clientStorage.setToken(result.token)
       dispatch.auth.signedIn(result)
     } catch (error) {
-      console.log(error)
       dispatch.auth.signInFailed({ errorMessage: 'Invalid credentials' })
     }
   },
@@ -52,6 +50,6 @@ const effects: IAuthEffects = {
     clientStorage.removeToken()
     dispatch.auth.signedOut()
   },
-}
+})
 
 export default effects

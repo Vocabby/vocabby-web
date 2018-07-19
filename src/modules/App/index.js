@@ -24,7 +24,7 @@ const App = () => (
           <Route exact path={ROUTE.SIGN_UP} component={SignUp} />
           <Route exact path={ROUTE.SIGN_OUT} component={SignOut} />
           <Route exact path="/vocabs/:id" component={VocabDetails} />
-          <Route exact path={ROUTE.PRACTICE} component={Practice} />
+          <Route exact path={`${ROUTE.PRACTICE}/:slug`} component={Practice} />
         </Switch>
       </BrowserRouter>
     </ThemeProvider>

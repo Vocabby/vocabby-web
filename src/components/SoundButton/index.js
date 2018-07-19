@@ -2,8 +2,8 @@
 import React from 'react'
 import Sound from 'react-sound'
 import { withState, withHandlers, defaultProps, compose } from 'recompose'
-import Icon from 'components/Icon'
 import { ButtonContainer } from './styled'
+import Icon from 'components/Icon'
 
 type IProps = {|
   doesAutoplay?: boolean,
@@ -48,13 +48,13 @@ export default compose(
     (props: IProps) => props.doesAutoplay ? Sound.status.PLAYING : Sound.status.STOPPED,
   ),
   withHandlers({
-    handleStop({ setPlayStatus }: IProps) {
+    handleStop: ({ setPlayStatus }: IProps) => () => {
       setPlayStatus(() => Sound.status.STOPPED)
     },
-    handlePlay({ setPlayStatus, playStatus }: IProps) {
+    handlePlay: ({ setPlayStatus, playStatus }: IProps) => () => {
       if (playStatus === Sound.status.STOPPED) {
-        this.setPlayStatus(() => Sound.status.PLAYING)
+        setPlayStatus(() => Sound.status.PLAYING)
       }
-    }
-  })
+    },
+  }),
 )(SoundButton)

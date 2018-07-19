@@ -13,7 +13,7 @@ type IProps = {
 const WordRow = ({ word, onRemove }: IProps) => (
   <Row>
     <td>
-      <SoundButton size="small" audioUrl={word.audioUrl} />
+      <SoundButton size="small" audioUrl={word.audioUrl} isVisible />
     </td>
     <td>
       <HighlightedText>{word.title}</HighlightedText>

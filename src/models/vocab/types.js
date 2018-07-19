@@ -1,4 +1,5 @@
 // @flow
+import type { RematchDispatch } from '@rematch/core'
 import type { IVocab } from 'common/types'
 
 export type IVocabState = {|
@@ -6,7 +7,7 @@ export type IVocabState = {|
   +isLoading: boolean,
 |}
 
-export type IVocabEffects = {|
+export type IVocabEffects = RematchDispatch => {|
   +loadAsync: Function,
 |}
 

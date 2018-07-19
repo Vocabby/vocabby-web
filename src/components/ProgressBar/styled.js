@@ -13,7 +13,7 @@ export const ProgressContainer = styled.div`
 
 export const ProgressValue = styled.div`
   transition: width 400ms ease-in-out;
-  background-color: ${props => props.theme.greenColor};
+  background-color: ${props => props.theme.color.green};
 
   float: left;
   height: 100%;

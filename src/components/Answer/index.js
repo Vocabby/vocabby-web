@@ -1,6 +1,7 @@
 // @flow
 import React, { Fragment } from 'react'
 import { AnswerContainer, AccentedChar } from './styled'
+import Icon from 'components/Icon'
 import { equalWithoutAccents } from 'common/utils'
 
 type IProps = {|
@@ -13,7 +14,7 @@ const Answer = ({ given, correct }: IProps) => (
     {
       equalWithoutAccents(correct, given) ? (
         <Fragment>
-          <i className="fa fa-check text-success animated fadeInUp"/>
+          <Icon icon="check" className="animated fadeInUp" success />{' '}
           <span>
             {
               correct.split('').map((char, index) =>
@@ -25,7 +26,7 @@ const Answer = ({ given, correct }: IProps) => (
         </Fragment>
       ) : (
         <Fragment>
-          <i className="fa fa-close text-danger animated rotateIn"/>
+          <Icon icon="close" className="animated rotateIn" danger />{' '}
           {
             given && given.length > 0 ? (
               <strike>{given}</strike>

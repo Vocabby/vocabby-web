@@ -5,6 +5,7 @@ import Answer from 'components/Answer'
 import SoundButton from 'components/SoundButton'
 import { WidgetBody, WidgetFooter } from 'components/Generic'
 import { equalWithoutAccents } from 'common/utils'
+import { WordInput } from './styled'
 import type { IWord } from 'common/types'
 
 type IProps = {|
@@ -61,10 +62,10 @@ export default class TypeInGame extends Component<IProps, IState> {
               </div>
             ) : (
               <p>
-                <input
+                <WordInput
                   type="text"
                   autoFocus
-                  className="form-control input-lg mousetrap"
+                  className="mousetrap"
                   autoCorrect="off"
                   autoCapitalize="off"
                   autoComplete="off"

@@ -68,14 +68,14 @@ export const initPractice = async (slug: string): Promise<IPracticeSet> => {
     query: gql`
       query GetVocab($slug: String!) {
         vocab: vocabBySlug(slug: $slug) {
-          words {
-            id: _id
-            title
-            definition
-            audioUrl
-          }
           studyItems {
             wordId
+            word {
+              id: _id
+              title
+              definition
+              audioUrl
+            }
           }
         }
       }

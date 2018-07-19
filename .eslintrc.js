@@ -28,6 +28,7 @@ module.exports = {
     SyntheticKeyboardEvent: true,
     SyntheticMouseEvent: true,
     SyntheticInputEvent: true,
+    $Values: true,
   },
   rules: {
     'react/no-array-index-key': 0,
@@ -39,5 +40,6 @@ module.exports = {
     'no-extra-parens': 0,
     'jsx-a11y/no-autofocus': 0,
     'no-duplicate-imports': 0,
+    'no-alert': 0,
   },
 }

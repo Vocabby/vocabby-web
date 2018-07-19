@@ -1,10 +1,9 @@
 import React from 'react'
 import ClickableWord from './ClickableWord'
-import { Row } from './styled'
+import { Row, StyledIcon } from './styled'
 import Tooltip from 'components/Tooltip'
 
 const isAdded = (studyItems, wordsHash, wordId) => {
-  // console.log(wordsHash[wordId])
   return Boolean(studyItems[wordId])
 }
 
@@ -29,11 +28,10 @@ const Lyrics = ({ content, contentTranslated, words, studyItems }) => {
           {contentTranslated.length > 0 && (
             <Tooltip
               theme="light"
-              className="m-r-sm"
               position="left"
               title={contentTranslated[rowKey]}
             >
-              <i className="fa fa-eye" />
+              <StyledIcon icon="eye" />
             </Tooltip>
           )}
           {row.words.map(
