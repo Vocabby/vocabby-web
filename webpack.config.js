@@ -4,14 +4,36 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
+  entry: ['@babel/polyfill', './src/index.tsx'],
+  devtool: 'source-map',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    alias: {
+      common: path.resolve(__dirname, 'src/common/'),
+      components: path.resolve(__dirname, 'src/components/'),
+      hocs: path.resolve(__dirname, 'src/hocs/'),
+      modules: path.resolve(__dirname, 'src/modules/'),
+      store: path.resolve(__dirname, 'src/store/'),
+      styles: path.resolve(__dirname, 'src/styles/'),
+    }
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        test: /\.tsx?$/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                modules: false,
+              }
+            ],
+            '@babel/typescript',
+            '@babel/react'
+          ]
+        }
       },
       {
         test: /\.css$/,
@@ -19,6 +41,7 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
@@ -41,5 +64,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'static'),
     publicPath: '/',
+    filename: '[name].[contenthash].js',
   },
 }
