@@ -7,7 +7,7 @@ import { ContentHeader, DoorStop, MutedText } from './styled'
 import Lyrics from './Lyrics'
 import FavoriteButton from './FavoriteButton'
 import { IVocab } from 'common/types'
-import { Container, Column, Panel, PanelBody, PanelHeading } from 'components/Generic'
+import { Container, Column, Panel, PanelBody, PanelHeading, PanelFooter } from 'components/Generic'
 
 interface IProps {
   vocab: IVocab
@@ -55,12 +55,12 @@ const MediaVocab: SFC<IProps> = ({ vocab, isAuthenticated, removeStudyItem }) =>
             words={vocab.words}
             removeStudyItem={removeStudyItem}
           />
-          <div className="panel-footer text-center">
+          <PanelFooter>
             <PracticeButton
               hasStudyItems={vocab.studyItems.length > 0}
               vocabId={vocab.id}
               isAuthenticated={isAuthenticated} />
-          </div>
+          </PanelFooter>
         </Panel>
       </StickyBox>
     </Column>

@@ -14,7 +14,7 @@ const PracticeButton: SFC<IOuterProps> = ({
   hasStudyItems,
 }) => (
   <Link to={isAuthenticated ? `/practice/${vocabId}` : '/signin'}>
-    <Button primary disabled={isAuthenticated && !hasStudyItems}>
+    <Button primary block disabled={isAuthenticated && !hasStudyItems}>
       {isAuthenticated ? 'Practice' : 'Sign in to practice'}
     </Button>
   </Link>

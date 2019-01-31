@@ -46,7 +46,11 @@ export const PanelBody = styled.div`
 `
 
 export const PanelHeading = styled.div`
-  padding: 10px 15px;
+  padding: 10px 20px;
+`
+
+export const PanelFooter = styled.div`
+  padding: 10px 20px;
 `
 
 export const Button = styled.button<{ primary?: boolean, block?: boolean }>`

@@ -1,14 +1,8 @@
 import React, { SFC } from 'react'
-import Sound from 'react-sound'
+import Sound, { PlayStatus } from 'react-sound'
 import { withState, withHandlers, defaultProps, compose } from 'recompose'
 import { ButtonContainer } from './styled'
 import Icon from 'components/Icon'
-
-enum PlayStatus {
-  Playing = 'PLAYING',
-  Paused = 'PAUSED',
-  Stopped = 'STOPPED',
-}
 
 interface IOuterProps {
   doesAutoplay?: boolean
